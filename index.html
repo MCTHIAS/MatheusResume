@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="description" content="Portfolio of Matheus de Castro Pereira, Software Engineering student and developer.">
+  <meta name="keywords" content="portfolio, software engineer, Matheus de Castro Pereira, CS50, developer">
+  <meta name="author" content="Matheus de Castro Pereira">
+  <title>MCThias Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="island">
+        <nav class="menu">
+          <a id="menu-home">Home</a>
+          <a id="menu-videos">Videos</a>
+          <span></span>
+        </nav>
+      </div>
+    </header>
+
+    <div id="home-section" class="home-section">
+      <section class="banner">
+
+        <div class="video-background">
+            <video autoplay loop muted playsinline>
+              <source src="images/BG.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="content">
+
+          <h1 class="left">Matheus Pereira</h1>
+
+          <div class="right">
+            <h2>Software Engineer</h2>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="linkedin">
+        <h2 class="section-title">Minhas Publicações Recentes</h2>
+        <div class="logos">
+            <div class="logos-slide">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7375633928365281280?collapsed=1" title="Publicação incorporada 1"></iframe>
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7374160427703885824?collapsed=1" title="Publicação incorporada 2"></iframe>
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7370120502591459328?collapsed=1" title="Publicação incorporada 3"></iframe>
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7368725881428570112?collapsed=1" title="Publicação incorporada 4"></iframe>
+            </div>
+            <div class="logos-slide">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7375633928365281280?collapsed=1" title="Publicação incorporada 1"></iframe>
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7374160427703885824?collapsed=1" title="Publicação incorporada 2"></iframe>
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7370120502591459328?collapsed=1" title="Publicação incorporada 3"></iframe>
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7368725881428570112?collapsed=1" title="Publicação incorporada 4"></iframe>
+            </div>
+        </div>
+      </section>
+
+    </div>
+
+    <div id="videos-section" style="display: none;">
+      <section class="video-slider">
+        <div class="list">
+          <div class="item active">
+            <video src="images/cathped.mp4" autoplay muted></video>
+          </div>
+          <div class="item">
+            <video src="images/Project(CS50).mp4" autoplay muted></video>
+          </div>
+        </div>
+
+        <div class="arrows">
+          <button id="prev">&lt;</button>
+          <button id="next">&gt;</button>
+        </div>
+
+        <div class="thumbnail">
+          <div class="thumbnail-wrapper">
+            <div class="thumb-item active">
+              <img src="images/Fabricio’s CathPed.png" alt="Thumbnail 1" />
+            </div>
+            <div class="thumb-item">
+              <img src="images/CS50x.png" alt="Thumbnail 2" />
+            </div>
+          </div>
+        </div>
+
+        <button id="toggle-sound" class="sound-toggle-btn" aria-label="Toggle Sound">
+          <i class="fa-solid fa-volume-xmark"></i>
+        </button>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const homeBtn = document.getElementById('menu-home');
+      const videosBtn = document.getElementById('menu-videos');
+      const homeSection = document.getElementById('home-section');
+      const videosSection = document.getElementById('videos-section');
+
+      function switchSection(from, to, direction) {
+        from.classList.remove('fade-slide-in');
+        from.classList.add('fade-slide-out');
+
+        setTimeout(() => {
+          from.style.display = 'none';
+          from.classList.remove('fade-slide-out');
+
+          to.style.display = 'block';
+          to.classList.remove('fade-slide-out');
+          to.classList.add('fade-slide-in');
+        }, 400);
+      }
+
+      homeBtn.addEventListener('click', () => {
+        if (videosSection.style.display !== 'none') {
+          switchSection(videosSection, homeSection, 'right');
+        }
+      });
+
+      videosBtn.addEventListener('click', () => {
+        if (homeSection.style.display !== 'none') {
+          switchSection(homeSection, videosSection, 'left');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
