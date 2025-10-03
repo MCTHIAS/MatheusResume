@@ -1,200 +1,78 @@
-// Elementos de controle
-const menuHome = document.getElementById('menu-home');
-const menuVideos = document.getElementById('menu-videos');
-const homeSection = document.getElementById('home-section');
-const videosSection = document.getElementById('videos-section');
-const header = document.querySelector('header');
-const toggleSoundBtn = document.getElementById('toggle-sound');
+let items = document.querySelectorAll('.logos .item');
+let isThrottled = false;
+let active = 1;
 
-// Vídeos e miniaturas
-const videoItems = document.querySelectorAll('.video-slider .list .item');
-const videoThumbnails = document.querySelectorAll('.video-slider .thumbnail .thumb-item');
-const autoShowElements = document.querySelectorAll('.autoShow');
+function loadShow(){
+    let stt = 0;
+    items.forEach((item, idx) => {
+        item.style.transition = 'transform 0.5s, filter 0.5s, opacity 0.5s';
+    });
 
-let itemActive = 0;
+    // Item ativo centralizado
+    items[active].style.transform = `translateX(-50%) scale(1)`;
+    items[active].style.zIndex = 1;
+    items[active].style.filter = 'none';
+    items[active].style.opacity = 1;
 
-// === SLIDER NAVIGATION ===
-const next = document.getElementById('next');
-const prev = document.getElementById('prev');
-
-// Lista de vídeos do slider
-function showSlider() {
-  document.querySelector('.video-slider .list .item.active')?.classList.remove('active');
-  document.querySelector('.video-slider .thumbnail .item.active')?.classList.remove('active');
-
-  videoItems[itemActive].classList.add('active');
-  videoThumbnails[itemActive].classList.add('active');
-  setPositionThumbnail();
-
-  document.querySelectorAll('.video-slider .list .item video').forEach(video => {
-    video.pause();
-    video.currentTime = 0;
-    video.removeEventListener('ended', handleVideoEnd);
-  });
-
-  const currentVideo = videoItems[itemActive].querySelector('video');
-  if (currentVideo) {
-    currentVideo.play();
-    currentVideo.addEventListener('ended', handleVideoEnd);
-    updateSoundIcon(currentVideo);
-  }
-}
-
-function handleVideoEnd() {
-  videoItems[itemActive].classList.remove('active');
-  videoThumbnails[itemActive].classList.remove('active');
-  itemActive = (itemActive + 1) % videoItems.length;
-  videoItems[itemActive].classList.add('active');
-  videoThumbnails[itemActive].classList.add('active');
-  showSlider();
-}
-
-function setPositionThumbnail() {
-  const thumbnailActive = document.querySelector('.video-slider .thumbnail .item.active');
-  if (!thumbnailActive) return;
-  const rect = thumbnailActive.getBoundingClientRect();
-  if (rect.left < 0 || rect.right > window.innerWidth) {
-    thumbnailActive.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-  }
-}
-
-// === VIDEO CONTROLS ===
-function pauseAllVideos() {
-  videoItems.forEach(item => {
-    const video = item.querySelector('video');
-    video.pause();
-    video.currentTime = 0;
-    video.muted = true;
-  });
-  updateSoundIcon(null);
-}
-
-function playCurrentVideo() {
-  const currentVideo = videoItems[itemActive].querySelector('video');
-  if (currentVideo) {
-    currentVideo.play();
-    currentVideo.addEventListener('ended', handleVideoEnd);
-    updateSoundIcon(currentVideo);
-  }
-}
-
-function updateSoundIcon(video) {
-  if (!toggleSoundBtn) return;
-  if (!video) {
-    toggleSoundBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-  } else {
-    toggleSoundBtn.innerHTML = video.muted
-      ? '<i class="fa-solid fa-volume-xmark"></i>'
-      : '<i class="fa-solid fa-volume-high"></i>';
-  }
-}
-
-// === EVENTOS ===
-menuHome.addEventListener('click', () => {
-  homeSection.style.display = 'block';
-  videosSection.style.display = 'none';
-  header.classList.remove('fixed');
-  window.scrollTo(0, 0);
-  pauseAllVideos();
-});
-
-menuVideos.addEventListener('click', () => {
-  homeSection.style.display = 'none';
-  videosSection.style.display = 'block';
-  header.classList.add('fixed');
-  showSlider();
-});
-
-toggleSoundBtn.addEventListener('click', () => {
-  const currentVideo = videoItems[itemActive].querySelector('video');
-  if (currentVideo) {
-    currentVideo.muted = !currentVideo.muted;
-    updateSoundIcon(currentVideo);
-  }
-});
-
-videoThumbnails.forEach((thumb, index) => {
-  thumb.addEventListener('click', () => {
-    if (itemActive !== index) {
-      videoItems[itemActive].classList.remove('active');
-      videoThumbnails[itemActive].classList.remove('active');
-      itemActive = index;
-      videoItems[itemActive].classList.add('active');
-      videoThumbnails[itemActive].classList.add('active');
-      showSlider();
+    // Próximos à direita
+    stt = 0;
+    for(let i = active + 1; i < items.length; i++){
+        stt++;
+        items[i].style.transform = `translateX(calc(-50% + ${120*stt}px)) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)`;
+        items[i].style.zIndex = -stt;
+        items[i].style.filter = 'blur(5px)';
+        items[i].style.opacity = stt > 2 ? 0 : 0.6;
     }
-  });
-});
 
-next?.addEventListener('click', () => {
-  itemActive = (itemActive + 1) % videoItems.length;
-  showSlider();
-});
-
-prev?.addEventListener('click', () => {
-  itemActive = (itemActive - 1 + videoItems.length) % videoItems.length;
-  showSlider();
-});
-
-// === ANIMAÇÕES SCROLL ===
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show-auto');
-    } else {
-      entry.target.classList.remove('show-auto');
+    // Próximos à esquerda
+    stt = 0;
+    for(let i = active - 1; i >= 0; i--){
+        stt++;
+        items[i].style.transform = `translateX(calc(-50% - ${120*stt}px)) scale(${1 - 0.2*stt}) perspective(16px) rotateY(1deg)`;
+        items[i].style.zIndex = -stt;
+        items[i].style.filter = 'blur(5px)';
+        items[i].style.opacity = stt > 2 ? 0 : 0.6;
     }
-  });
-}, {
-  threshold: 0.1
+}
+
+function onWheel(e) {
+    if (isThrottled) return;
+    isThrottled = true;
+    setTimeout(() => isThrottled = false, 400);
+
+    if (e.deltaY > 0) {
+        if (active < items.length - 1) {
+            active++;
+            loadShow();
+        }
+    } else if (e.deltaY < 0) {
+        if (active > 0) {
+            active--;
+            loadShow();
+        }
+    }
+}
+
+// 1. Função para bloquear o scroll da página
+function blockPageScroll(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+}
+
+const logos = document.querySelector('.logos');
+
+// 2. Bloqueia e libera o scroll da página conforme mouse
+logos.addEventListener('mouseenter', () => {
+    window.addEventListener('wheel', blockPageScroll, { passive: false });
+    window.addEventListener('touchmove', blockPageScroll, { passive: false });
+});
+logos.addEventListener('mouseleave', () => {
+    window.removeEventListener('wheel', blockPageScroll, { passive: false });
+    window.removeEventListener('touchmove', blockPageScroll, { passive: false });
 });
 
-autoShowElements.forEach(el => observer.observe(el));
+// 3. Scroll do carrossel só funciona em .logos
+logos.addEventListener('wheel', onWheel, { passive: false });
 
-// === Inicialização ===
-window.addEventListener('DOMContentLoaded', () => {
-  homeSection.style.display = 'block';
-  videosSection.style.display = 'none';
-
-  const firstVideo = videoItems[itemActive].querySelector('video');
-  if (firstVideo) {
-    firstVideo.play();
-    firstVideo.addEventListener('ended', handleVideoEnd);
-    updateSoundIcon(firstVideo);
-  }
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const nav = document.querySelector('nav.menu');
-  const links = nav.querySelectorAll('a');
-  const indicator = nav.querySelector('span');
-  let activeIndex = 0; // Posição inicial
-
-  // Inicializa posição do span no ativo
-  updateSpanPosition(links[activeIndex]);
-
-  links.forEach((link, index) => {
-    // Clique: torna ativo
-    link.addEventListener('click', () => {
-      activeIndex = index;
-      updateSpanPosition(link);
-    });
-
-    // Hover: move o span
-    link.addEventListener('mouseenter', () => {
-      updateSpanPosition(link);
-    });
-
-    // Saiu do hover: volta pro ativo
-    link.addEventListener('mouseleave', () => {
-      updateSpanPosition(links[activeIndex]);
-    });
-  });
-
-  function updateSpanPosition(targetLink) {
-    const left = targetLink.offsetLeft;
-    indicator.style.left = `${left}px`;
-  }
-});
-
+loadShow();
