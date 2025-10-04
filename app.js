@@ -5,7 +5,7 @@ let active = 1;
 function loadShow(){
     let stt = 0;
     items.forEach((item, idx) => {
-        item.style.transition = 'transform 0.5s, filter 0.5s, opacity 0.5s';
+        item.style.transition = 'transform 0.8s, filter 0.5s, opacity 0.5s';
     });
 
     // Item ativo centralizado
