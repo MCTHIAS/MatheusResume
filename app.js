@@ -1,3 +1,24 @@
+const overlays = document.querySelectorAll('.iframe-overlay');
+
+// Função para bloquear o scroll da página
+function blockPageScroll(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+}
+
+// Adiciona/remover o bloqueio apenas quando o mouse estiver na overlay
+overlays.forEach(overlay => {
+  overlay.addEventListener('mouseenter', () => {
+    window.addEventListener('wheel', blockPageScroll, { passive: false });
+    window.addEventListener('touchmove', blockPageScroll, { passive: false });
+  });
+  overlay.addEventListener('mouseleave', () => {
+    window.removeEventListener('wheel', blockPageScroll, { passive: false });
+    window.removeEventListener('touchmove', blockPageScroll, { passive: false });
+  });
+});
+
 let items = document.querySelectorAll('.logos .item');
 let isThrottled = false;
 let active = 1;
@@ -53,26 +74,28 @@ function onWheel(e) {
     }
 }
 
-// 1. Função para bloquear o scroll da página
-function blockPageScroll(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
-}
-
 const logos = document.querySelector('.logos');
-
-// 2. Bloqueia e libera o scroll da página conforme mouse
-logos.addEventListener('mouseenter', () => {
-    window.addEventListener('wheel', blockPageScroll, { passive: false });
-    window.addEventListener('touchmove', blockPageScroll, { passive: false });
-});
-logos.addEventListener('mouseleave', () => {
-    window.removeEventListener('wheel', blockPageScroll, { passive: false });
-    window.removeEventListener('touchmove', blockPageScroll, { passive: false });
-});
-
-// 3. Scroll do carrossel só funciona em .logos
 logos.addEventListener('wheel', onWheel, { passive: false });
 
 loadShow();
+
+document.addEventListener("DOMContentLoaded", function() {
+  const arrow = document.querySelector('.arrow-wrapper');
+  const linkedinSection = document.querySelector('.linkedin');
+
+  if (arrow && linkedinSection) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        // Quanto mais visível a section, menor a opacidade
+        let ratio = entry.intersectionRatio;
+        // Inverter: quanto mais aparece linkedin, menos opaco fica o arrow
+        arrow.style.opacity = 1 - ratio;
+      });
+    }, {
+      root: null,
+      threshold: Array.from({length: 20}, (_,i)=>i/20) // mais suave
+    });
+
+    observer.observe(linkedinSection);
+  }
+});
