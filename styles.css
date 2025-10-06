@@ -258,7 +258,8 @@ body::-webkit-scrollbar {
     padding: 0 var(--side-padding);
     margin-top: 100px;
     flex-wrap: wrap;
-    
+    min-height: var(--banner-h);
+    height: 100vh;
 }
 
 .about-content {
@@ -271,7 +272,7 @@ body::-webkit-scrollbar {
     flex-wrap: wrap;
     padding: 0 var(--side-padding);
     gap: 2rem;
-    margin-top: 100px;
+    margin-top: 90px;
     margin-bottom: 100px;
 }
 
@@ -285,7 +286,7 @@ body::-webkit-scrollbar {
 }
 
 .about-content p {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #E0E0E0;
 }
 
@@ -327,7 +328,7 @@ body::-webkit-scrollbar {
 
 .card {
   position: relative;
-  width: 530px;
+  width: 500px;
   height: 640px;
   border-radius: 14px;
   z-index: 1111;
@@ -343,7 +344,7 @@ body::-webkit-scrollbar {
   position: absolute;
   top: 5px;
   left: 5px;
-  width: 520px;
+  width: 490px;
   height: 630px;
   z-index: 2;
   background: #000000;
@@ -374,8 +375,8 @@ body::-webkit-scrollbar {
 .bg .info {
  display: flex;
  flex-direction: column;
- width: 510px;
- height: 240px;
+ width: 480px;
+ height: 230px;
  z-index: 3;
  color: #000000;
  background-clip: border-box;
