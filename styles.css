@@ -260,6 +260,9 @@ body::-webkit-scrollbar {
     flex-wrap: wrap;
     min-height: var(--banner-h);
     height: 100vh;
+    background: url('images/BG2.png') no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .about-content {
@@ -272,7 +275,6 @@ body::-webkit-scrollbar {
     flex-wrap: wrap;
     padding: 0 var(--side-padding);
     gap: 2rem;
-    margin-top: 90px;
     margin-bottom: 100px;
 }
 
