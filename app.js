@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const overlays = document.querySelectorAll('.iframe-overlay');
     const items = document.querySelectorAll('.logos .item');
-    const logos = document.querySelector('.logos');
     let isThrottled = false;
     let active = 1;
 
@@ -20,37 +19,26 @@ document.addEventListener("DOMContentLoaded", function() {
             window.removeEventListener('wheel', blockPageScroll, { passive: false });
             window.removeEventListener('touchmove', blockPageScroll, { passive: false });
         });
-
-        // CORREÇÃO: Adiciona o controle do carrossel diretamente no overlay
         overlay.addEventListener('wheel', onWheel, { passive: false });
     });
 
     function loadShow(){
-        let stt = 0;
-        items.forEach((item, idx) => {
+        items.forEach(item => {
             item.style.transition = 'transform 0.8s, filter 0.5s, opacity 0.5s';
         });
-
-        // Item ativo centralizado
         items[active].style.transform = `translateX(-50%) scale(1)`;
         items[active].style.zIndex = 1;
         items[active].style.filter = 'none';
         items[active].style.opacity = 1;
-
-        // Próximos à direita
-        stt = 0;
         for(let i = active + 1; i < items.length; i++){
-            stt++;
+            let stt = i - active;
             items[i].style.transform = `translateX(calc(-50% + ${120*stt}px)) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)`;
             items[i].style.zIndex = -stt;
             items[i].style.filter = 'blur(5px)';
             items[i].style.opacity = stt > 2 ? 0 : 0.6;
         }
-
-        // Próximos à esquerda
-        stt = 0;
         for(let i = active - 1; i >= 0; i--){
-            stt++;
+            let stt = active - i;
             items[i].style.transform = `translateX(calc(-50% - ${120*stt}px)) scale(${1 - 0.2*stt}) perspective(16px) rotateY(1deg)`;
             items[i].style.zIndex = -stt;
             items[i].style.filter = 'blur(5px)';
@@ -62,40 +50,37 @@ document.addEventListener("DOMContentLoaded", function() {
         if (isThrottled) return;
         isThrottled = true;
         setTimeout(() => isThrottled = false, 400);
-
-        if (e.deltaY > 0) {
-            if (active < items.length - 1) {
-                active++;
-                loadShow();
-            }
-        } else if (e.deltaY < 0) {
-            if (active > 0) {
-                active--;
-                loadShow();
-            }
+        if (e.deltaY > 0 && active < items.length - 1) {
+            active++;
+            loadShow();
+        } else if (e.deltaY < 0 && active > 0) {
+            active--;
+            loadShow();
         }
     }
-
-    // CORREÇÃO: Esta linha foi removida, pois a lógica foi movida para o loop 'overlays.forEach'
-    // logos.addEventListener('wheel', onWheel, { passive: false });
-
-    loadShow();
-
-    // Arrow Intersection Observer
-    const arrow = document.querySelector('.arrow-wrapper');
-    const linkedinSection = document.querySelector('.linkedin');
-
-    if (arrow && linkedinSection) {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                let ratio = entry.intersectionRatio;
-                arrow.style.opacity = 1 - ratio;
-            });
-        }, {
-            root: null,
-            threshold: Array.from({length: 20}, (_,i)=>i/20)
-        });
-
-        observer.observe(linkedinSection);
+    if (items.length > 0) {
+        loadShow();
     }
+
+    const sections = document.querySelectorAll('main > section');
+
+    sections.forEach((section, index) => {
+        const arrow = section.querySelector('.arrow-wrapper');
+        
+        const nextSection = sections[index + 1];
+
+        if (arrow && nextSection) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const ratio = entry.intersectionRatio;
+                    arrow.style.opacity = 1 - ratio;
+                });
+            }, {
+                root: null,
+                threshold: Array.from({length: 101}, (_, i) => i / 100)
+            });
+
+            observer.observe(nextSection);
+        }
+    });
 });
