@@ -267,7 +267,7 @@ body::-webkit-scrollbar {
 
 .about-content {
     display: flex;
-    max-width: 50vw;
+    max-width: 45vw;
     position: relative;
     z-index: 1;
     font-family: "Josefin Sans", sans-serif;
@@ -283,8 +283,10 @@ body::-webkit-scrollbar {
     font-size: var(--fs-title);
     color: #282828;
     position: relative;
-    line-height: 1.1;
+    line-height: 0.9;
     text-align: left;
+    max-width: 100%;
+    font-size: 3rem;
 }
 
 .about-content p {
