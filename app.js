@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // --- LÓGICA DO CARROSSEL LINKEDIN ---
     const overlays = document.querySelectorAll('.iframe-overlay');
     const items = document.querySelectorAll('.logos .item');
     let isThrottled = false;
@@ -62,11 +63,11 @@ document.addEventListener("DOMContentLoaded", function() {
         loadShow();
     }
 
+    // --- LÓGICA DAS SETAS ---
     const sections = document.querySelectorAll('main > section');
 
     sections.forEach((section, index) => {
         const arrow = section.querySelector('.arrow-wrapper');
-        
         const nextSection = sections[index + 1];
 
         if (arrow && nextSection) {
@@ -79,8 +80,49 @@ document.addEventListener("DOMContentLoaded", function() {
                 root: null,
                 threshold: Array.from({length: 101}, (_, i) => i / 100)
             });
-
             observer.observe(nextSection);
         }
     });
+    
+    // --- LÓGICA DA ANIMAÇÃO PARALLAX (VERSÃO FINAL SIMPLIFICADA) ---
+    gsap.registerPlugin(ScrollTrigger);
+
+    const aboutContent = document.querySelector(".about-content");
+    const aboutCard = document.querySelector(".card");
+    const aboutSection = document.querySelector(".about-me");
+
+    // Animação para .about-content (Entra e Sai pela esquerda)
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: aboutSection,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+        }
+    })
+    .fromTo(aboutContent, 
+        { xPercent: -100, opacity: 0 },
+        { xPercent: 0, opacity: 1, ease: "power1.inOut" }
+    )
+    .to(aboutContent, 
+        { xPercent: -100, opacity: 0, ease: "power1.inOut" }
+    );
+
+
+    // Animação para .card (Entra e Sai pela direita)
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: aboutSection,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+        }
+    })
+    .fromTo(aboutCard, 
+        { xPercent: 100, opacity: 0 },
+        { xPercent: 0, opacity: 1, ease: "power1.inOut" }
+    )
+    .to(aboutCard, 
+        { xPercent: 100, opacity: 0, ease: "power1.inOut" }
+    );
 });
