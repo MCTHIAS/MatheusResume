@@ -193,7 +193,6 @@ body::-webkit-scrollbar {
     font-family: "Josefin Sans", sans-serif;
     color: #E0E0E0;
     top: 5%;
-    text-align: center;
 }
 
 
@@ -244,7 +243,6 @@ body::-webkit-scrollbar {
     align-items: center;
     flex-direction: column;
     overflow: visible;
-    background-color: red;
 }
 
 .about-container {
@@ -267,7 +265,7 @@ body::-webkit-scrollbar {
 }
 
 .about-content h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     color: #282828;
     line-height: 0.9;
     text-align: left;
@@ -416,19 +414,218 @@ body::-webkit-scrollbar {
   animation: blob-bounce 5s infinite ease;
 }
 
-.projects-section {
-    min-height: 100vh;
+
+.projects-and-certs-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--side-padding);
     padding: 100px var(--side-padding);
-    color: white;
-    position: relative;
-    z-index: 5;
+    min-height: 100vh;
     background: #0a0a1a;
+    overflow-x: hidden;
 }
 
-.projects-content {
-    max-width: 50%;
-    margin-left: auto;
+.projects-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 710px;
+    gap: .3rem;
+    position: relative;
+    z-index: 1;
 }
+
+.Certificates {
+    position: relative; 
+    top: auto;
+    transform: none;
+    right: auto;
+    height: 640px;
+    width: 500px;
+    flex-shrink: 0;
+    border: 2px solid #282828;
+    border-radius: 20px;
+    z-index: 10;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    will-change: transform;
+}
+
+.Certificates h2 {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+  z-index: 10;
+}
+
+.Certificates:hover {
+ border-color: #008bf8;
+ box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+
+.card-project {
+  width: 100%;
+  max-width: 710px;
+  height: 150px;
+  padding: 0.5rem;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  background: linear-gradient(#282828, #282828) padding-box,
+              linear-gradient(145deg, transparent 35%,rgba(2, 29, 78, 0.681), #40c9ff) border-box;
+  border: 2px solid transparent;
+  transition: .8s;
+  overflow: hidden;
+  color: white;
+}
+
+.card-project:hover {
+  height: 700px;
+}
+
+.align {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-self: flex-start;
+  align-items: center;
+}
+
+.align .links {
+    position: absolute;
+    right: 5px;
+    display: flex;
+    align-self: flex-end;
+}
+
+.align .links a {
+    font-size: 15px;
+}
+
+.red {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: #ff605c;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+}
+
+.yellow {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: #ffbd44;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+}
+
+.green {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: #00ca4e;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+}
+
+.card-project h1 {
+  top: 0;
+  font-size: 3rem;
+  text-align: center;
+  color: #000000;
+  text-shadow: -10px 5px 10px rgba(0, 0, 0, 0.573);
+}
+
+.card-project p {
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: .7rem;
+    margin-top: .5rem;
+}
+
+.video-container {
+  width: 620px;
+  height: 320px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: rgb(165, 165, 165);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  pointer-events: none;
+}
+
+.video-container video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+
+.TechStack {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.TechStack-header {
+  font-size: 35px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #000000;
+}
+
+.TechStack-inner {
+  display: flex;
+  width: max-content;
+  animation: techstack 25s linear infinite;
+}
+
+.TechStack-group {
+  display: flex;
+}
+
+.TechStack-group span {
+  margin: 0 .7rem;
+  white-space: nowrap;
+  background: #000000;
+  color: white;
+  padding: 4px 16px 4px 12px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+}
+
+@keyframes techstack {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
 
 /* Animações e Media Queries (Originais) */
 @keyframes floatArrow {

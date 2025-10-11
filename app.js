@@ -27,10 +27,12 @@ document.addEventListener("DOMContentLoaded", function() {
         items.forEach(item => {
             item.style.transition = 'transform 0.8s, filter 0.5s, opacity 0.5s';
         });
-        items[active].style.transform = `translateX(-50%) scale(1)`;
-        items[active].style.zIndex = 1;
-        items[active].style.filter = 'none';
-        items[active].style.opacity = 1;
+        if (items[active]) {
+            items[active].style.transform = `translateX(-50%) scale(1)`;
+            items[active].style.zIndex = 1;
+            items[active].style.filter = 'none';
+            items[active].style.opacity = 1;
+        }
         for(let i = active + 1; i < items.length; i++){
             let stt = i - active;
             items[i].style.transform = `translateX(calc(-50% + ${120*stt}px)) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)`;
@@ -84,45 +86,106 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
     
-    // --- LÓGICA DA ANIMAÇÃO PARALLAX (VERSÃO FINAL SIMPLIFICADA) ---
+    // --- LÓGICA DAS ANIMAÇÕES COM GSAP ---
     gsap.registerPlugin(ScrollTrigger);
 
+    // Animação para a seção "About Me"
     const aboutContent = document.querySelector(".about-content");
     const aboutCard = document.querySelector(".card");
     const aboutSection = document.querySelector(".about-me");
 
-    // Animação para .about-content (Entra e Sai pela esquerda)
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: aboutSection,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-        }
-    })
-    .fromTo(aboutContent, 
-        { xPercent: -100, opacity: 0 },
-        { xPercent: 0, opacity: 1, ease: "power1.inOut" }
-    )
-    .to(aboutContent, 
-        { xPercent: -100, opacity: 0, ease: "power1.inOut" }
-    );
+    if (aboutContent && aboutCard && aboutSection) {
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: aboutSection,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+            }
+        })
+        .fromTo(aboutContent, 
+            { xPercent: -100, opacity: 0 },
+            { xPercent: 0, opacity: 1, ease: "power1.inOut" }
+        )
+        .to(aboutContent, 
+            { xPercent: -100, opacity: 0, ease: "power1.inOut" }
+        );
 
 
-    // Animação para .card (Entra e Sai pela direita)
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: aboutSection,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: aboutSection,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+            }
+        })
+        .fromTo(aboutCard, 
+            { xPercent: 100, opacity: 0 },
+            { xPercent: 0, opacity: 1, ease: "power1.inOut" }
+        )
+        .to(aboutCard, 
+            { xPercent: 100, opacity: 0, ease: "power1.inOut" }
+        );
+    }
+    
+    // --- INÍCIO DA MODIFICAÇÃO: Animação para Projetos e Certificados ---
+    const projectsSection = document.querySelector(".projects-section");
+    const certificatesSection = document.querySelector(".Certificates");
+    const container = document.querySelector(".projects-and-certs-container");
+
+    if (projectsSection && certificatesSection && container) {
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: container,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1
+            }
+        })
+        .fromTo(projectsSection,
+            { xPercent: -100, opacity: 0 },
+            { xPercent: 0, opacity: 1, ease: "power1.inOut" }
+        )
+        .to(projectsSection,
+            { xPercent: -100, opacity: 0, ease: "power1.inOut" }
+        );
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: container,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+            }
+        })
+        .fromTo(certificatesSection,
+            { xPercent: 100, opacity: 0 },
+            { xPercent: 0, opacity: 1, ease: "power1.inOut" }
+        )
+        .to(certificatesSection,
+            { xPercent: 100, opacity: 0, ease: "power1.inOut" }
+        );
+    }
+    // --- LÓGICA DO HOVER NOS VÍDEOS DOS PROJETOS ---
+    const cards = document.querySelectorAll('.card-project');
+
+    cards.forEach(card => {
+        const video = card.querySelector('video');
+        if (video) {
+            card.addEventListener('mouseenter', () => {
+                const playPromise = video.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Erro ao tentar dar play no vídeo:", error);
+                    });
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0;
+            });
         }
-    })
-    .fromTo(aboutCard, 
-        { xPercent: 100, opacity: 0 },
-        { xPercent: 0, opacity: 1, ease: "power1.inOut" }
-    )
-    .to(aboutCard, 
-        { xPercent: 100, opacity: 0, ease: "power1.inOut" }
-    );
+    });
 });
