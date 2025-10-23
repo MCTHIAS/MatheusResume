@@ -438,7 +438,7 @@ body::-webkit-scrollbar {
     z-index: 1;
 }
 
-.Certificates {
+.Certificates-content {
     position: relative; 
     top: auto;
     transform: none;
@@ -459,15 +459,54 @@ body::-webkit-scrollbar {
 .Certificates h2 {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
-  margin-top: 20px;
   text-align: center;
   z-index: 10;
+  gap: .3rem;
 }
 
 .Certificates:hover {
  border-color: #008bf8;
  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.Certificate-card {
+ display: flex;
+ flex-direction: column;
+ width: 480px;
+ height: 230px;
+ z-index: 3;
+ color: #000000;
+ background-clip: border-box;
+ align-items: center;
+ justify-content: center;
+ -webkit-background-clip: text;
+ background: linear-gradient(#212121, #212121) padding-box,
+               linear-gradient(145deg, transparent 35%,rgba(2, 29, 78, 0.681), #40c9ff) border-box;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transform-origin: right bottom;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.Certificate-card span {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.Certificate-card p {
+    font-size: .6rem;
+    color: #E0E0E0;
+    margin-bottom: 1em;
+}
+
+.Certificate-card .links {
+ display: flex;
+ gap: 1rem;
+}
+
+.links a {
+    font-size: 0.7rem;
+    padding: .3em 2em;
 }
 
 
