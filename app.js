@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // --- LÓGICA DO CARROSSEL LINKEDIN ---
     const overlays = document.querySelectorAll('.iframe-overlay');
     const items = document.querySelectorAll('.logos .item');
     let isThrottled = false;
@@ -65,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
         loadShow();
     }
 
-    // --- LÓGICA DAS SETAS ---
     const sections = document.querySelectorAll('main > section');
 
     sections.forEach((section, index) => {
@@ -86,10 +84,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
     
-    // --- LÓGICA DAS ANIMAÇÕES COM GSAP ---
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animação para a seção "About Me"
     const aboutContent = document.querySelector(".about-content");
     const aboutCard = document.querySelector(".card");
     const aboutSection = document.querySelector(".about-me");
@@ -128,8 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
             { xPercent: 100, opacity: 0, ease: "power1.inOut" }
         );
     }
-    
-    // --- INÍCIO DA MODIFICAÇÃO: Animação para Projetos e Certificados ---
     const projectsSection = document.querySelector(".projects-section");
     const certificatesSection = document.querySelector(".Certificates");
     const container = document.querySelector(".projects-and-certs-container");
@@ -166,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function() {
             { xPercent: 100, opacity: 0, ease: "power1.inOut" }
         );
     }
-    // --- LÓGICA DO HOVER NOS VÍDEOS DOS PROJETOS ---
     const cards = document.querySelectorAll('.card-project');
 
     cards.forEach(card => {
