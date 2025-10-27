@@ -243,7 +243,7 @@ body::-webkit-scrollbar {
     position: relative;
     z-index: 3;
     min-height: 100vh;
-    padding: 0 var(--side-padding);
+    padding: 50px var(--side-padding);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -426,7 +426,7 @@ body::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
     gap: var(--side-padding);
-    padding: 100px var(--side-padding);
+    padding: 0 var(--side-padding);
     min-height: 100vh;
     background: #000000;
     overflow: hidden;
@@ -676,7 +676,7 @@ body::-webkit-scrollbar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 100px var(--side-padding);
+  padding: 50px var(--side-padding);
   animation: autoShowAnimation both;
   animation-timeline: view(60% 30%);
 }
