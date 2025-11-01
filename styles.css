@@ -524,9 +524,7 @@ body::-webkit-scrollbar {
   padding: 0.5rem;
   border-radius: 10px;
   backdrop-filter: blur(5px);
-  background: linear-gradient(#282828, #282828) padding-box,
-              linear-gradient(145deg, transparent 35%,rgba(2, 29, 78, 0.681), #40c9ff) border-box;
-  border: 2px solid transparent;
+  background: #000000;
   transition: .8s;
   overflow: hidden;
   color: white;
@@ -543,6 +541,7 @@ body::-webkit-scrollbar {
   gap: 5px;
   align-self: flex-start;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .align .links {
@@ -556,35 +555,11 @@ body::-webkit-scrollbar {
     font-size: 15px;
 }
 
-.red {
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  background-color: #ff605c;
-  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
-}
-
-.yellow {
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  background-color: #ffbd44;
-  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
-}
-
-.green {
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  background-color: #00ca4e;
-  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
-}
-
 .card-project h1 {
   top: 0;
   font-size: 3rem;
   text-align: center;
-  color: #000000;
+  color: #282828;
 }
 
 .card-project p {
@@ -639,13 +614,23 @@ body::-webkit-scrollbar {
   font-weight: 800;
   text-align: center;
   margin-bottom: 15px;
-  color: #000000;
+  color: #282828;
 }
 
 .TechStack-inner {
   display: flex;
+  overflow: hidden;
   width: max-content;
   animation: techstack 25s linear infinite;
+}
+
+.TechStack-inner:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 100%;
+  background: red;
 }
 
 .TechStack-group {
