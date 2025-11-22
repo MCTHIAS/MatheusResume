@@ -779,155 +779,93 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 900px) {
-    main > section,
-    .linkedin,
-    .about-me,
-    .projects-and-certs-container,
-    .contact-me {
-        display: flex !important;
-        flex-direction: column !important;
-        position: relative !important;
-        height: auto !important;
-        min-height: auto !important;
-        padding: 60px 20px !important;
-        margin: 0 !important;
-        overflow: visible !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
+
+    .home-content {
+
+        max-width: 100%;
+
+        text-align: center;
+
+        align-items: center;
+
     }
 
-    .linkedin { margin-bottom: 50px !important; }
-    .about-me { margin-bottom: 50px !important; }
 
-    .logos {
-        height: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 30px !important;
+
+    .about-container {
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 3rem;
+
     }
+
+
+
+    .about-content, .card {
+
+        position: relative;
+
+        width: 90% !important;
+
+        max-width: 500px;
+
+        top: auto;
+
+        left: auto;
+
+        right: auto;
+
+        transform: none;
+
+        margin-bottom: 3rem;
+
+    }
+
+
 
     .logos-slide {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
+
+        flex-direction: column;
+
+    }
+
+    .logos {
+
+        height: auto;
+
+        max-width: 100vw;
+
     }
 
     .iframe-wrapper {
-        position: relative !important;
-        width: 100% !important;
-        height: 500px !important;
-        margin-bottom: 20px !important;
+
+        margin-bottom: var(--iframe-gap);
+
     }
 
-    .item, .iframe-overlay {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100% !important;
+    .projects-and-certs-container {
+
+        flex-direction: column;
+
+        height: auto;
+
     }
 
-    .about-container {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 40px !important;
-        width: 100% !important;
-    }
+    .projects-section,
 
-    .about-content, .card {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        right: auto !important;
-        transform: none !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-
-    .about-content {
-        text-align: center;
-        align-items: center;
-    }
-
-    .card {
-        width: 90vw !important;
-        max-width: 400px !important;
-        height: auto !important;
-        aspect-ratio: 500/640;
-        margin: 0 auto !important;
-        right: auto !important;
-    }
-
-    .bg {
-        width: 100% !important;
-        height: 100% !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-    }
-
-    .card .img {
-        width: 70% !important;
-        height: auto !important;
-    }
-
-    .projects-section, 
     .Certificates-content {
-        width: 100% !important;
-        max-width: 100% !important;
+
+        max-width: 90%;
+
+        margin-bottom: 3rem;
+
     }
 
-    .card-project {
-        width: 100% !important;
-        height: auto !important;
-        margin-bottom: 30px !important;
-    }
-
-    .video-container {
-        width: 100% !important;
-        height: auto !important;
-        aspect-ratio: 16/9;
-    }
-
-    .Certificate-card {
-        width: 100% !important;
-        height: auto !important;
-        padding: 20px !important;
-    }
-
-    .home-content {
-        max-width: 100% !important;
-        padding: 0 10px !important;
-    }
-    
-    .profiles {
-        position: relative !important;
-        margin-top: 30px !important;
-        justify-content: center !important;
-        width: 100% !important;
-        left: auto !important;
-        bottom: auto !important;
-        padding: 0 !important;
-    }
-
-    .contact-card {
-        width: 95% !important;
-    }
-
-    .section-title {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-        margin-bottom: 40px !important;
-    }
-
-    .arrow-wrapper {
-        display: none !important;
-    }
 }
 
 @media (max-width: 600px) {
