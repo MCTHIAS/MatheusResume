@@ -779,48 +779,127 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 900px) {
+
+    main > section,
+    .linkedin,
+    .about-me,
+    .projects-and-certs-container,
+    .contact-me {
+        height: auto !important;
+        min-height: auto !important;
+        padding-top: 80px !important;
+        padding-bottom: 80px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+
+    .home-section {
+        min-height: 80vh !important;
+        justify-content: center !important;
+    }
+    
     .home-content {
-        max-width: 100%;
         text-align: center;
-        align-items: center;
+        padding: 0 20px;
+    }
+
+    .profiles {
+        position: relative;
+        width: 100%;
+        justify-content: center;
+        margin-top: 30px;
+        bottom: auto;
+        left: auto;
+        padding: 0;
+    }
+
+    .logos {
+        height: auto !important;
+        margin-bottom: 20px;
+    }
+    
+    .item, .iframe-overlay {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        margin: 0 auto 20px auto;
+        width: 90% !important;
+        max-width: 400px;
+        height: 500px !important;
     }
 
     .about-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        gap: 3rem;
+        gap: 50px;
+        height: auto !important;
     }
 
     .about-content, .card {
-        position: relative;
-        width: 90% !important;
-        max-width: 500px;
-        top: auto;
-        left: auto;
-        right: auto;
-        transform: none;
-        margin-bottom: 3rem;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 450px;
     }
 
-    .logos-slide {
-        flex-direction: column;
+    .about-content {
+        text-align: center;
+        align-items: center;
     }
-    .logos {
+    
+    .about-content .btn {
+        align-self: center;
+    }
+
+    .card {
+        margin: 0 auto;
         height: auto;
-        max-width: 100vw;
+        aspect-ratio: 500/640;
     }
-    .iframe-wrapper {
-        margin-bottom: var(--iframe-gap);
-    }
+
     .projects-and-certs-container {
-        flex-direction: column;
-        height: auto;
+        gap: 60px;
     }
-    .projects-section,
+
+    .projects-section, 
     .Certificates-content {
-        max-width: 90%;
-        margin-bottom: 3rem;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .card-project {
+        height: auto !important;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .video-container {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16/9;
+    }
+
+    .contact-card {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .section-title {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 0 0 40px 0;
+    }
+    
+    .arrow-wrapper {
+        display: none;
     }
 }
 
