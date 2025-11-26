@@ -1,8 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     const overlays = document.querySelectorAll('.iframe-overlay');
     const items = document.querySelectorAll('.logos .item');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
     let isThrottled = false;
     let active = 1;
+
+    if (items.length > 0) {
+        if (active < 0) active = 0;
+        if (active > items.length - 1) active = items.length - 1;
+    } else {
+        active = 0;
+    }
 
     function blockPageScroll(e) {
         e.preventDefault();
@@ -26,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function() {
         items.forEach(item => {
             item.style.transition = 'transform 0.8s, filter 0.5s, opacity 0.5s';
         });
+
+        if (items.length === 0) return;
+
         if (items[active]) {
             items[active].style.transform = `translateX(-50%) scale(1)`;
             items[active].style.zIndex = 1;
@@ -46,6 +58,8 @@ document.addEventListener("DOMContentLoaded", function() {
             items[i].style.filter = 'blur(5px)';
             items[i].style.opacity = stt > 2 ? 0 : 0.6;
         }
+
+        updateCarouselButtons();
     }
 
     function onWheel(e) {
@@ -60,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
             loadShow();
         }
     }
+
     if (items.length > 0) {
         loadShow();
     }
@@ -105,4 +120,80 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
+
+    function updateCarouselButtons() {
+        if (!prevBtn || !nextBtn) return;
+        if (active <= 0) {
+            prevBtn.setAttribute('disabled', 'true');
+            prevBtn.classList.add('disabled');
+        } else {
+            prevBtn.removeAttribute('disabled');
+            prevBtn.classList.remove('disabled');
+        }
+
+        if (active >= items.length - 1) {
+            nextBtn.setAttribute('disabled', 'true');
+            nextBtn.classList.add('disabled');
+        } else {
+            nextBtn.removeAttribute('disabled');
+            nextBtn.classList.remove('disabled');
+        }
+    }
+
+    function onPrevClick() {
+        if (active > 0) {
+            active--;
+            loadShow();
+        }
+    }
+    function onNextClick() {
+        if (active < items.length - 1) {
+            active++;
+            loadShow();
+        }
+    }
+
+    function enableControls() {
+        if (!prevBtn || !nextBtn) return;
+        prevBtn.removeEventListener('click', onPrevClick);
+        nextBtn.removeEventListener('click', onNextClick);
+
+        prevBtn.addEventListener('click', onPrevClick);
+        nextBtn.addEventListener('click', onNextClick);
+
+        prevBtn.removeAttribute('disabled');
+        nextBtn.removeAttribute('disabled');
+
+        updateCarouselButtons();
+    }
+
+    function disableControls() {
+        if (!prevBtn || !nextBtn) return;
+        prevBtn.removeEventListener('click', onPrevClick);
+        nextBtn.removeEventListener('click', onNextClick);
+
+        prevBtn.setAttribute('disabled', 'true');
+        nextBtn.setAttribute('disabled', 'true');
+    }
+
+    const mql = window.matchMedia('(max-width: 1024px)');
+
+    function handleMqChange(e) {
+        const matches = (typeof e.matches === 'boolean') ? e.matches : mql.matches;
+        if (matches) {
+            enableControls();
+        } else {
+            disableControls();
+        }
+    }
+
+    if (typeof mql.addEventListener === 'function') {
+        mql.addEventListener('change', handleMqChange);
+    } else if (typeof mql.addListener === 'function') {
+        mql.addListener(handleMqChange);
+    }
+
+    handleMqChange(mql);
+
+    updateCarouselButtons();
 });
