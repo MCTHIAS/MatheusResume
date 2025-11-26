@@ -42,8 +42,11 @@ body::-webkit-scrollbar {
     list-style: none;
 }
 
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
 
-/* Banner */
 .home-section {
     position: relative;
     height: 100vh;
@@ -64,22 +67,11 @@ body::-webkit-scrollbar {
     font-family: "Josefin Sans", sans-serif;
     padding: 0 var(--side-padding);
 }
+
 .home-content h1 {
     position: relative;
     font-size: var(--fs-title);
     line-height: 1.1;
-}
-
-.home-content h1::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: #000000;
-    animation: showRight 1s ease forwards;
-    animation-delay: .3s;
 }
 
 .home-content h3 {
@@ -94,15 +86,16 @@ body::-webkit-scrollbar {
 
 .profiles {
     position: absolute;
-    bottom: 0.3rem;
-    width: 10vw;
-    height: 7vh;
+    bottom: .5rem;
+    min-width: 10vw;
+    height: 5vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2em;
+    gap: .5em;
     padding: 0 var(--side-padding);
 }
+
 
 .profiles a {
     position: relative;
@@ -113,7 +106,7 @@ body::-webkit-scrollbar {
     align-items: center;
     background: transparent;
     z-index: 1;
-    width: 6rem;
+    width: 2rem;
 }
 
 .profiles img {
@@ -151,14 +144,14 @@ body::-webkit-scrollbar {
 
 .img-hover:hover {
     background: #000000;
-    opacity: .2;
+    opacity: .6;
 }
 
 
  .arrow-wrapper {
   position: absolute;
   left: 50%;
-  bottom: -120px;
+  bottom: 20px;
   transform: translateX(-50%);
   z-index: 10;
   width: auto;
@@ -184,10 +177,9 @@ body::-webkit-scrollbar {
   background: #000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 100px 0;
   animation: autoShowAnimation both;
   animation-timeline: view(60% 30%);
+  overflow: hidden;
 }
 
 .section-title {
@@ -200,20 +192,27 @@ body::-webkit-scrollbar {
     margin-top: 2rem;
 }
 
-
 .logos {
   position: relative;
-  width: 100%;
-  height: 720px;
+  width: 100vw;
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.logos-slide {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
 .item{
     position: absolute;
     width: 550px;
+    max-width: 70vw;
     height: 720px;
+    max-height: 60vh;
     border-radius: 10px;
     background-color: #fff;
     padding: 2px;
@@ -227,7 +226,9 @@ body::-webkit-scrollbar {
 .iframe-overlay {
     position: absolute;
     width: 550px;
+    max-width: 70vw;
     height: 720px;
+    max-height: 60vh;
     background: transparent;
     border-radius: 10px;
     padding: 2px;
@@ -254,18 +255,20 @@ body::-webkit-scrollbar {
 .about-container {
     position: relative;
     width: 100%;
-    height: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    gap: 3rem;
 }
 
 .about-content {
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 45%;
-    max-width: 45vw;
     z-index: 1;
+    flex: 1 1 400px;
+    max-width: 800px;
 }
 
 .about-content h1 {
@@ -317,12 +320,13 @@ body::-webkit-scrollbar {
 }
 
 .card {
-  position: absolute;
-  right: 0;
-  width: 500px;
-  height: 540px;
+  position: relative;
+  width: auto;
+  max-width: fit-content;
+  height: auto;
+  max-height: fit-content;
   border-radius: 14px;
-  z-index: 1111;
+  z-index: 1;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -333,28 +337,33 @@ body::-webkit-scrollbar {
 }
 
 .bg {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 490px;
-  height: 530px;
-  z-index: 2;
-  background: #000000;
-  backdrop-filter: blur(24px);
-  border-radius: 10px;
-  overflow: hidden;
-  outline: 2px solid white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    width: auto;
+    max-width: fit-content;
+    height: auto;
+    max-height: fit-content;
+    z-index: 2;
+    background: #000000;
+    backdrop-filter: blur(24px);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .card .img {
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
     height: 500px;
     align-items: center;
     justify-content: center;
     display: flex;
+    overflow: hidden;
 }
 
 .card .img img{
@@ -365,57 +374,43 @@ body::-webkit-scrollbar {
 }
 
 .bg .info {
- display: flex;
- flex-direction: column;
- width: 480px;
- height: 230px;
- z-index: 3;
- color: #000000;
- background-clip: border-box;
- align-items: center;
- justify-content: center;
- -webkit-background-clip: text;
- background: linear-gradient(#212121, #212121) padding-box,
-               linear-gradient(145deg, transparent 35%,rgba(2, 29, 78, 0.681), #40c9ff) border-box;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  transform-origin: right bottom;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 1rem;
+    z-index: 3;
+    color: #000000;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#212121, #212121) padding-box,
+                linear-gradient(145deg, transparent 35%, rgba(2, 29, 78, 0.681), #40c9ff) border-box;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin-bottom: 1rem;
 }
 
 .bg .info span {
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .bg .info p {
     font-size: .65rem;
     color: #E0E0E0;
     margin-bottom: 1em;
+    text-align: center;
 }
 
 .info .links {
- display: flex;
- gap: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .links a {
     font-size: 0.7rem;
-    padding: .3em 2em;
-}
-
-.blob {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background-color: rgba(31, 215, 232, 0.873);
-  opacity: 1;
-  filter: blur(12px);
-  animation: blob-bounce 5s infinite ease;
+    padding: .5em 1.5em;
 }
 
 
@@ -423,11 +418,13 @@ body::-webkit-scrollbar {
     position: relative;
     z-index: 4;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    gap: var(--side-padding);
-    padding: 0 var(--side-padding);
+    align-items: flex-start;
+    gap: 3rem;
+    padding: 50px 20px;
     min-height: 100vh;
+    width: 100%;
     background: #000000;
     overflow: hidden;
     animation: autoShowAnimation both;
@@ -435,31 +432,27 @@ body::-webkit-scrollbar {
 }
 
 .projects-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 710px;
-    gap: .3rem;
-    position: relative;
-    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    place-items: center;
+    gap: 3rem;
+    row-gap: 5rem;
 }
 
 .Certificates-content {
     position: relative; 
-    top: auto;
-    transform: none;
-    right: auto;
-    height: 640px;
-    width: 500px;
-    flex-shrink: 0;
-    border: 2px solid #282828;
-    border-radius: 20px;
-    z-index: 10;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;  
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    min-height: 640px;
+    border: 2px solid #282828;
+    border-radius: 20px;
+    z-index: 10;
+    padding: .3rem;
+    flex: 1 1 400px;
 }
 
 .Certificates h2 {
@@ -476,27 +469,26 @@ body::-webkit-scrollbar {
 }
 
 .Certificate-card {
- display: flex;
- flex-direction: column;
- width: 480px;
- height: 200px;
- z-index: 3;
- color: #000000;
- background-clip: border-box;
- align-items: center;
- justify-content: center;
- -webkit-background-clip: text;
- background: linear-gradient(#212121, #212121) padding-box,
-               linear-gradient(145deg, transparent 35%,rgba(2, 29, 78, 0.681), #40c9ff) border-box;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  margin-top: .5rem;
-  transform-origin: right bottom;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 200px;
+    z-index: 3;
+    color: #000000;
+    background-clip: border-box;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#212121, #212121) padding-box,
+                linear-gradient(145deg, transparent 35%, rgba(2, 29, 78, 0.681), #40c9ff) border-box;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin-top: 1rem;
+    padding: 1rem;
 }
 
 .Certificate-card h1 {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-family: "Josefin Sans", sans-serif;
 }
 
@@ -516,8 +508,10 @@ body::-webkit-scrollbar {
     padding: .3em 2em;
 }
 
-
 .card-project {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   width: 100%;
   max-width: 710px;
   height: 150px;
@@ -525,9 +519,10 @@ body::-webkit-scrollbar {
   border-radius: 10px;
   backdrop-filter: blur(5px);
   background: #000000;
-  transition: .8s;
+  transition: .5s;
   overflow: hidden;
   color: white;
+  box-sizing: border-box;
 }
 
 .card-project:hover {
@@ -535,13 +530,13 @@ body::-webkit-scrollbar {
 }
 
 .align {
-  padding: 1rem;
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-self: flex-start;
-  align-items: center;
-  margin-bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .align .links {
@@ -557,21 +552,23 @@ body::-webkit-scrollbar {
 
 .card-project h1 {
   top: 0;
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
   color: #282828;
 }
 
 .card-project p {
     font-size: 1rem;
-    text-align: left;
+    text-align: center;
     margin-bottom: .7rem;
     margin-top: .5rem;
 }
 
 .video-container {
-  width: 620px;
-  height: 320px;
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+  aspect-ratio: 16 / 9;
   border-radius: 8px;
   overflow: hidden;
   background-color: rgb(165, 165, 165);
@@ -580,12 +577,14 @@ body::-webkit-scrollbar {
   justify-content: center;
   position: relative;
   pointer-events: none;
+  margin: 0 auto;
 }
 
 .video-container video{
-    width: 100%;
-    height: 100%;
+    max-width: 620px;
+    height: auto;
     object-fit: cover;
+    aspect-ratio: 16/9;
     pointer-events: none;
 }
 
@@ -667,6 +666,52 @@ body::-webkit-scrollbar {
   }
 }
 
+@media (max-width: 768px) {
+    
+    .projects-and-certs-container {
+        padding: 40px 15px;
+        gap: 2rem;
+    }
+
+    .card-project {
+        width: 100vw;
+    }
+
+    .video-container video{
+        width: 100vw;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+
+    .align {
+        flex-direction: column;
+        max-width: 100%;
+        align-items: left;
+        margin-bottom: 1.5rem;
+    }
+
+    .align .links {
+        position: static;
+        margin-top: 5px;
+        align-self: left;
+        display: block;
+    }
+
+    .links a {
+        display: inline-block;
+        padding: 0.5em 1em;
+    }
+
+    .card-project h1 {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .card-project p {
+        text-align: center;
+    }
+}
+
 .contact-me {
   display: flex;
   flex-direction: column;
@@ -728,7 +773,7 @@ body::-webkit-scrollbar {
 @keyframes autoShowAnimation {
   from{
     opacity: 0;
-    transform: translateY(50px) scale(0.3);
+    transform: translateY(50px) scale(0.8);
   }
   to {
     opacity: 1;
@@ -770,112 +815,63 @@ body::-webkit-scrollbar {
     to   { opacity: 0; transform: translateX(-100px);}
 }
 
-
 @media (max-width: 1200px) {
+
     .linkedin, .logos {
         max-width: 98vw;
         padding: 0 1vw;
     }
+
 }
+
+
 
 @media (max-width: 900px) {
 
     .home-content {
-
         max-width: 100%;
-
         text-align: center;
-
         align-items: center;
-
     }
-
-
 
     .about-container {
-
         display: flex;
-
         flex-direction: column;
-
         justify-content: center;
-
         gap: 3rem;
-
     }
-
-
 
     .about-content, .card {
-
         position: relative;
-
         width: 90% !important;
-
         max-width: 500px;
-
         top: auto;
-
         left: auto;
-
         right: auto;
-
         transform: none;
-
         margin-bottom: 3rem;
-
     }
 
-
-
     .logos-slide {
-
         flex-direction: column;
-
     }
 
     .logos {
-
         height: auto;
-
         max-width: 100vw;
-
     }
 
     .iframe-wrapper {
-
         margin-bottom: var(--iframe-gap);
-
     }
 
     .projects-and-certs-container {
-
         flex-direction: column;
-
         height: auto;
-
     }
 
     .projects-section,
-
     .Certificates-content {
-
-        max-width: 90%;
-
-        margin-bottom: 3rem;
-
-    }
-
-}
-
-@media (max-width: 600px) {
-    :root {
-        --fs-title: clamp(1.3rem, 8vw, 4.5rem);
-        --fs-section-title: clamp(1.2rem, 6vw, 2.2rem);
-        --side-padding: clamp(0.5rem, 2vw, 1rem);
-    }
-    .linkedin, .logos {
-        max-width: 100vw;
-        padding: 0 2vw;
+        max-width: fit-content;
     }
 }
