@@ -421,7 +421,6 @@ img, video, iframe {
     align-items: flex-start;
     gap: 3rem;
     padding: 50px 20px;
-    min-height: 100vh;
     width: 100%;
     background: #000000;
     overflow: hidden;
@@ -530,7 +529,6 @@ img, video, iframe {
 .align {
     padding: 1rem;
     display: flex;
-    flex-direction: row;
     gap: 5px;
     justify-content: space-between;
     align-items: center;
@@ -548,11 +546,18 @@ img, video, iframe {
     font-size: 15px;
 }
 
+.align p {
+  position: absolute;
+  display: flex;
+  align-self: flex-start;
+  color: black;
+}
+
 .card-project h1 {
   top: 0;
   font-size: 2.5rem;
   text-align: center;
-  color: #282828;
+  color: rgba(14, 113, 138, 1);
 }
 
 .card-project p {
@@ -688,6 +693,10 @@ img, video, iframe {
         margin-bottom: 1.5rem;
     }
 
+    .align p {
+      color: white;
+    }
+
     .align .links {
         position: static;
         margin-top: 5px;
@@ -713,16 +722,17 @@ img, video, iframe {
 .contact-me {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 50px var(--side-padding);
   animation: autoShowAnimation both;
   animation-timeline: view(60% 30%);
+  height: 80vh;
 }
 
 .contact-card {
   width: 100%;
-  max-width: 690px;
+  max-width: 600px;
+  height: auto;
   padding: 2.5rem;
   border-radius: 14px;
   z-index: 10;
@@ -739,6 +749,7 @@ img, video, iframe {
     font-size: var(--fs-base);
     line-height: 1.6;
     text-align: center;
+    color: white;
 }
 
 .contact-info {
@@ -863,14 +874,12 @@ img, video, iframe {
     }
 
     .projects-and-certs-container {
-        flex-direction: column;
-        height: auto;
+        align-items: center;
     }
 
-    .projects-section,
-    .Certificates-content {
-        max-width: 100%;
-        align-self: center;
+    .align p {
+      color: white;
+      font-size: .7rem;
     }
     
 }
