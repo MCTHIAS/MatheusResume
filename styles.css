@@ -61,7 +61,7 @@ img, video, iframe {
 }
 
 .home-content {
-    max-width: 50vw;
+    max-width: 58vw;
     position: relative;
     z-index: 1;
     font-family: "Josefin Sans", sans-serif;
@@ -76,7 +76,7 @@ img, video, iframe {
 
 .home-content h3 {
     font-size: 1.3rem;
-    color:  rgba(14, 113, 138, 1);
+    color: #0e718a;
 }
 
 .home-content p {
@@ -127,15 +127,15 @@ img, video, iframe {
 }
 
 .profiles a:hover::before {
-    width: 90%;
+    width: 80%;
 }
 
 .img-hover {
     position: absolute;
     top: 0;
     right: 0;
-    width: 35%;
-    height: 100%;
+    width: 39%;
+    height: 100vh;
     background: transparent;
     transition: 2s;
 }
