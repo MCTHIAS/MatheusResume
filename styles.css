@@ -830,6 +830,13 @@ img, video, iframe {
         max-width: 100vw;
     }
 
+    .home-section{
+      text-align: center;
+      align-items: center;
+      background: url('images/BG2.png') no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
 }
 
 
