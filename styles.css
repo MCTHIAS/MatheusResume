@@ -134,7 +134,7 @@ img, video, iframe {
     position: absolute;
     top: 0;
     right: 0;
-    width: 39%;
+    width: 40%;
     height: 100vh;
     background: transparent;
     transition: 2s;
@@ -836,6 +836,16 @@ img, video, iframe {
       background: url('images/BG2.png') no-repeat;
       background-size: cover;
       background-position: center;
+    }
+
+    .img-hover {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 100vh;
+      background: transparent;
+      transition: 2s;
     }
 }
 
