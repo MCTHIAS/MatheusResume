@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const overlays = document.querySelectorAll('.iframe-overlay');
     const items = document.querySelectorAll('.logos .item');
     const prevBtn = document.querySelector('.prev-btn');
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         overlay.addEventListener('wheel', onWheel, { passive: false });
     });
 
-    function loadShow(){
+    function loadShow() {
         items.forEach(item => {
             item.style.transition = 'transform 0.8s, filter 0.5s, opacity 0.5s';
         });
@@ -44,16 +44,16 @@ document.addEventListener("DOMContentLoaded", function() {
             items[active].style.filter = 'none';
             items[active].style.opacity = 1;
         }
-        for(let i = active + 1; i < items.length; i++){
+        for (let i = active + 1; i < items.length; i++) {
             let stt = i - active;
-            items[i].style.transform = `translateX(calc(-50% + ${120*stt}px)) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)`;
+            items[i].style.transform = `translateX(calc(-50% + ${120 * stt}px)) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(-1deg)`;
             items[i].style.zIndex = -stt;
             items[i].style.filter = 'blur(5px)';
             items[i].style.opacity = stt > 2 ? 0 : 0.6;
         }
-        for(let i = active - 1; i >= 0; i--){
+        for (let i = active - 1; i >= 0; i--) {
             let stt = active - i;
-            items[i].style.transform = `translateX(calc(-50% - ${120*stt}px)) scale(${1 - 0.2*stt}) perspective(16px) rotateY(1deg)`;
+            items[i].style.transform = `translateX(calc(-50% - ${120 * stt}px)) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(1deg)`;
             items[i].style.zIndex = -stt;
             items[i].style.filter = 'blur(5px)';
             items[i].style.opacity = stt > 2 ? 0 : 0.6;
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }, {
                 root: null,
-                threshold: Array.from({length: 101}, (_, i) => i / 100)
+                threshold: Array.from({ length: 101 }, (_, i) => i / 100)
             });
             observer.observe(nextSection);
         }
@@ -102,6 +102,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const cards = document.querySelectorAll('.card-project');
 
     cards.forEach(card => {
+
+        card.addEventListener('click', function (e) {
+
+            if (e.target.closest('a')) return;
+
+            this.classList.toggle('active');
+        });
+
         const video = card.querySelector('video');
         if (video) {
             card.addEventListener('mouseenter', () => {
@@ -109,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (playPromise !== undefined) {
                     playPromise.catch(error => {
-                        console.error("Erro ao tentar dar play no vídeo:", error);
+                        console.error("Error attempting to play the video:", error);
                     });
                 }
             });
