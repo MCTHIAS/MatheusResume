@@ -787,16 +787,16 @@ iframe {
     flex-direction: column;
     align-items: center;
     padding: 50px var(--side-padding);
-    min-height: 100vh;
+    min-height: auto;
     justify-content: center;
 }
 
 .contact-card {
-    width: 100%;
-    max-width: 850px;
+    width: auto;
+    max-width: 700px;
     height: auto;
     min-height: fit-content;
-    padding: clamp(1.5rem, 5vw, 3rem);
+    padding: clamp(1rem, 4vw, 2rem);
     border-radius: 14px;
     z-index: 10;
     background: rgba(0, 0, 0, 0.7);
@@ -811,11 +811,12 @@ iframe {
 }
 
 .contact-intro {
-    margin-bottom: 2rem;
-    font-size: var(--fs-base);
-    line-height: 1.6;
+    width: 75%;
+    margin-bottom: 1rem;
+    line-height: 1.15;
     text-align: center;
     color: white;
+    font-size: .7rem;
 }
 
 .contact-info {
@@ -823,7 +824,7 @@ iframe {
 }
 
 .contact-info p {
-    font-size: var(--fs-base);
+    font-size: 20px;
 }
 
 .contact-info a {
@@ -843,8 +844,8 @@ iframe {
 }
 
 .contact-card .btn {
-    padding: 0.7rem 1.5rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.5rem;
 }
 
 .contact-form {
@@ -857,13 +858,13 @@ iframe {
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    padding: 1rem;
+    padding: .6rem;
     border-radius: 8px;
     border: 1px solid #40c9ff;
     background: rgba(0, 0, 0, 0.5);
     color: white;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: .5rem;
     box-sizing: border-box;
 }
 
