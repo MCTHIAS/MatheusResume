@@ -879,6 +879,7 @@ iframe {
     width: 100%;
 }
 
+.home-content,
 .section-title,
 .about-content,
 .about-me .card,
@@ -887,7 +888,8 @@ iframe {
 .contact-card,
 .logos,
 .skill-category,
-.button-container {
+.button-container,
+.Certificates-content {
     animation:
         autoShowAnimation both,
         autoHideAnimation forwards;
