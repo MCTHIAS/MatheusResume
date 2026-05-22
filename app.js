@@ -79,25 +79,21 @@ document.addEventListener("DOMContentLoaded", function () {
         loadShow();
     }
 
-    const sections = document.querySelectorAll('main > section');
+    const homeSection = document.querySelector('.home-section');
+    const arrowWrapper = homeSection ? homeSection.querySelector('.arrow-wrapper') : null;
 
-    sections.forEach((section, index) => {
-        const arrow = section.querySelector('.arrow-wrapper');
-        const nextSection = sections[index + 1];
-
-        if (arrow && nextSection) {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    const ratio = entry.intersectionRatio;
-                    arrow.style.opacity = 1 - ratio;
-                });
-            }, {
-                root: null,
-                threshold: Array.from({ length: 101 }, (_, i) => i / 100)
+    if (homeSection && arrowWrapper) {
+        const arrowObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const ratio = entry.intersectionRatio;
+                arrowWrapper.style.opacity = ratio > 0.25 ? ratio : 0;
             });
-            observer.observe(nextSection);
-        }
-    });
+        }, {
+            root: null,
+            threshold: Array.from({ length: 101 }, (_, i) => i / 100)
+        });
+        arrowObserver.observe(homeSection);
+    }
 
     const cards = document.querySelectorAll('.card-project');
 

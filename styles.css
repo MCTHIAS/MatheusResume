@@ -75,6 +75,7 @@ iframe {
     position: relative;
     font-size: var(--fs-title);
     line-height: 1.1;
+    text-shadow: 10px 10px 15px #0e718a, -10px -10px 15px #40c9ff;
 }
 
 .home-content h3 {
@@ -91,6 +92,14 @@ iframe {
     background: rgba(14, 113, 138, 0.2);
     padding: 0.3rem 0.8rem;
     border-radius: 6px;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .location-badge {
+        font-size: 0.65rem !important;
+        padding: 0.25rem 0.6rem;
+    }
 }
 
 .home-content p {
@@ -416,7 +425,7 @@ iframe {
 
 .card .img {
     width: 100%;
-    max-width: 350px;
+    max-width: 220px;
     height: auto;
     aspect-ratio: 3 / 4;
     align-items: center;
@@ -1032,7 +1041,7 @@ iframe {
     .card {
         position: relative;
         width: 90% !important;
-        max-width: 500px;
+        max-width: 320px;
         top: auto;
         left: auto;
         right: auto;
