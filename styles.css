@@ -341,6 +341,7 @@ iframe {
     color: #282828;
     line-height: 0.9;
     text-align: left;
+    text-shadow: 10px 10px 15px #0e718a, -10px -10px 15px #40c9ff;
 }
 
 .about-content p {
