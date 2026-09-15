@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const overlays = document.querySelectorAll('.iframe-overlay');
     const items = document.querySelectorAll('.logos .item');
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelector('.next-btn');
+    const logosContainer = document.querySelector('.logos');
+    
     let isThrottled = false;
     let active = 1;
 
+    // Initialization checks
     if (items.length > 0) {
         if (active < 0) active = 0;
         if (active > items.length - 1) active = items.length - 1;
@@ -13,24 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         active = 0;
     }
 
-    function blockPageScroll(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    }
-
-    overlays.forEach(overlay => {
-        overlay.addEventListener('mouseenter', () => {
-            window.addEventListener('wheel', blockPageScroll, { passive: false });
-            window.addEventListener('touchmove', blockPageScroll, { passive: false });
-        });
-        overlay.addEventListener('mouseleave', () => {
-            window.removeEventListener('wheel', blockPageScroll, { passive: false });
-            window.removeEventListener('touchmove', blockPageScroll, { passive: false });
-        });
-        overlay.addEventListener('wheel', onWheel, { passive: false });
-    });
-
+    // Carousel 3D placement logic
     function loadShow() {
         items.forEach(item => {
             item.style.transition = 'transform 0.8s, filter 0.5s, opacity 0.5s';
@@ -38,12 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (items.length === 0) return;
 
+        // Active center item
         if (items[active]) {
             items[active].style.transform = `translateX(-50%) scale(1)`;
             items[active].style.zIndex = 1;
             items[active].style.filter = 'none';
             items[active].style.opacity = 1;
         }
+
+        // Items to the right
         for (let i = active + 1; i < items.length; i++) {
             let stt = i - active;
             items[i].style.transform = `translateX(calc(-50% + ${120 * stt}px)) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(-1deg)`;
@@ -51,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
             items[i].style.filter = 'blur(5px)';
             items[i].style.opacity = stt > 2 ? 0 : 0.6;
         }
+
+        // Items to the left
         for (let i = active - 1; i >= 0; i--) {
             let stt = active - i;
             items[i].style.transform = `translateX(calc(-50% - ${120 * stt}px)) scale(${1 - 0.2 * stt}) perspective(16px) rotateY(1deg)`;
@@ -62,10 +52,15 @@ document.addEventListener("DOMContentLoaded", function () {
         updateCarouselButtons();
     }
 
+    // Scroll handling for the carousel area
     function onWheel(e) {
+        // Prevent default scroll behavior only when actively over the carousel container
+        e.preventDefault(); 
+        
         if (isThrottled) return;
         isThrottled = true;
         setTimeout(() => isThrottled = false, 400);
+
         if (e.deltaY > 0 && active < items.length - 1) {
             active++;
             loadShow();
@@ -75,10 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Attach scroll listener to the container rather than overlays
+    if (logosContainer) {
+        logosContainer.addEventListener('wheel', onWheel, { passive: false });
+    }
+
     if (items.length > 0) {
         loadShow();
     }
 
+    // Home Section Arrow animation logic
     const homeSection = document.querySelector('.home-section');
     const arrowWrapper = homeSection ? homeSection.querySelector('.arrow-wrapper') : null;
 
@@ -95,14 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
         arrowObserver.observe(homeSection);
     }
 
+    // Projects card logic (expand on click, play video on hover)
     const cards = document.querySelectorAll('.card-project');
 
     cards.forEach(card => {
-
         card.addEventListener('click', function (e) {
-
             if (e.target.closest('a')) return;
-
             this.classList.toggle('active');
         });
 
@@ -110,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (video) {
             card.addEventListener('mouseenter', () => {
                 const playPromise = video.play();
-
                 if (playPromise !== undefined) {
                     playPromise.catch(error => {
                         console.error("Error attempting to play the video:", error);
@@ -125,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Buttons logic
     function updateCarouselButtons() {
         if (!prevBtn || !nextBtn) return;
         if (active <= 0) {
@@ -150,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
             loadShow();
         }
     }
+
     function onNextClick() {
         if (active < items.length - 1) {
             active++;
@@ -180,6 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
         nextBtn.setAttribute('disabled', 'true');
     }
 
+    // Media Query listener for mobile controls
     const mql = window.matchMedia('(max-width: 1024px)');
 
     function handleMqChange(e) {
@@ -198,6 +199,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     handleMqChange(mql);
-
     updateCarouselButtons();
 });
